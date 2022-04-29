@@ -36,6 +36,12 @@ const mainObj = {
             editableByTool: 'pickaxe',
             possibleAddElement: false,
         },
+        ground_grass: {
+            name: 'ground_grass',
+            numCode: 6,
+            editableByTool: 'shovel',
+            possibleAddElement: false,
+        }
     },
     tools: ['pickaxe', 'axe', 'shovel'],
     getNameByNumCode: function (num) {
@@ -76,7 +82,7 @@ const mainMatrix = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 5, 5, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 5, 5, 0, 0],
     [0, 0, 5, 5, 5, 5, 5, 0, 0, 4, 4, 0, 0, 0, 0, 0, 5, 5, 0, 0],
-    [2, 2, 2, 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [6, 6, 6, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
@@ -130,7 +136,9 @@ function removeAllFromBank() {
 
 function getTypeElementByElement(element) {
     const classElement = element.getAttribute('class');
-    if (classElement.includes('ground')) {
+    if (classElement.includes('ground_grass')) {
+        return 'ground_grass';
+    } else if (classElement.includes('ground')) {
         return 'ground';
     } else if (classElement.includes('grass')) {
         return 'grass';
@@ -190,7 +198,7 @@ function eventListenerForInBank(element) {
 
 function eventListenerForBoxes(box) {
     box.addEventListener('click', event => {
-        const typeBox = getTypeElementByElement(box);
+        const typeBox = getTypeElementByElement(event.target);
         const courantSelect = findSelection();
         if (courantSelect === mainObj.getEditableByToolByName(typeBox)) {
             box.setAttribute('class', 'box sky');
@@ -207,5 +215,17 @@ function eventListenerForBoxes(box) {
                 }
             }
         }
+    });
+
+    box.addEventListener('mouseover', event => {
+        const typeBox = getTypeElementByElement(event.target);
+        const courantSelect = findSelection();
+        if (courantSelect === mainObj.getEditableByToolByName(typeBox)) {
+            event.target.setAttribute('data-editableByTool', 'true');
+        }
+    });
+
+    box.addEventListener('mouseout', event => {
+        event.target.removeAttribute('data-editableByTool');
     });
 }
