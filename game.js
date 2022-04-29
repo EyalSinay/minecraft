@@ -220,7 +220,7 @@ function eventListenerForBoxes(box) {
     box.addEventListener('mouseover', event => {
         const typeBox = getTypeElementByElement(event.target);
         const courantSelect = findSelection();
-        if (courantSelect === mainObj.getEditableByToolByName(typeBox)) {
+        if (courantSelect === mainObj.getEditableByToolByName(typeBox) || (mainObj.getPossibleAddElementByName(typeBox) && mainObj.getNumCodeByName(courantSelect) > 1)) {
             event.target.setAttribute('data-editableByTool', 'true');
         }
     });
