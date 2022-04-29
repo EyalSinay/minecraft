@@ -67,10 +67,12 @@ main {
 
 .box:hover {
     border: 3px solid black;
+    cursor: not-allowed;
 }
 
 .box[data-editableByTool= 'true']:hover{
     border: 3px solid yellow;
+    cursor: crosshair;
 }
 
 .sky {
