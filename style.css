@@ -32,8 +32,8 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    width: 600px;
-    height: 200px;
+    width: 60vw;
+    height: 40vh;
 }
 
 .start,
@@ -50,10 +50,6 @@ body {
     cursor: pointer;
     background-color: yellow;
     transition: 0.5s
-}
-
-[data-display="false"] {
-    display: none;
 }
 
 
@@ -213,6 +209,11 @@ main {
 }
 
 
+[data-display="false"] {
+    display: none;
+}
+
+
 /* mobile */
 @media(max-width: 900px) {
     .game-container {
@@ -242,5 +243,10 @@ main {
 
         border: 3px solid white;
         border-radius: 12px;
+    }
+
+
+    [data-display="false"] {
+        display: none;
     }
 }

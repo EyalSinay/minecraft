@@ -95,6 +95,7 @@ const varObj = {
     inBankCollection: function () {
         return document.querySelectorAll('.in-bank')
     },
+    gameContainer: document.querySelector('.game-container')
 }
 
 function resetGame() {
@@ -161,6 +162,7 @@ function findSelection() {
 varObj.starBtn.addEventListener('click', event => {
     const welcomePage = event.target.parentElement;
     welcomePage.setAttribute('data-display', 'false');
+    varObj.gameContainer.setAttribute('data-display', 'true');
 });
 
 // reset game:
