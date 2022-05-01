@@ -163,6 +163,7 @@ function findSelection() {
             return getTypeElementByElement(element);
         }
     }
+    return 'none';
 }
 
 
@@ -217,15 +218,19 @@ function eventListenerForBoxes(box) {
         }
     });
 
-    box.addEventListener('mouseover', event => {
+    box.addEventListener('mouseenter', event => {
         const typeBox = getTypeElementByElement(event.target);
         const courantSelect = findSelection();
         if (courantSelect === mainObj.getEditableByToolByName(typeBox) || (mainObj.getPossibleAddElementByName(typeBox) && mainObj.getNumCodeByName(courantSelect) > 1)) {
-            event.target.setAttribute('data-editableByTool', 'true');
+            event.target.setAttribute('data-cursor', 'editable');
+        } else if(courantSelect === 'none') {
+            event.target.setAttribute('data-cursor', 'auto');
+        } else {
+            event.target.setAttribute('data-cursor', 'not-allowed');
         }
     });
 
     box.addEventListener('mouseout', event => {
-        event.target.removeAttribute('data-editableByTool');
+        event.target.removeAttribute('data-cursor');
     });
 }

@@ -70,9 +70,17 @@ main {
     cursor: not-allowed;
 }
 
-.box[data-editableByTool= 'true']:hover{
-    border: 3px solid yellow;
+.box[data-cursor= 'auto']:hover{
+    border: 3px solid black;
+    cursor: auto;
+}
+.box[data-cursor= 'editable']:hover{
+    border: 3px solid greenyellow;
     cursor: crosshair;
+}
+.box[data-cursor= 'not-allowed']:hover{
+    border: 3px solid red;
+    cursor: not-allowed;
 }
 
 .sky {
@@ -234,6 +242,7 @@ main {
         flex-direction: column;
     }
 
+    main,
     .menu {
         width: 100%;
     }
